@@ -1,1 +1,1 @@
-# SpringMVC-Hibernate-AOP
+# Spring MVC-Hibernate-AOP
