@@ -2,7 +2,6 @@ package com.maksim.spring.mvc_hibernate_aop.dao;
 
 import com.maksim.spring.mvc_hibernate_aop.entity.Employee;
 
-//import jakarta.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -19,6 +18,7 @@ public class EmployeeDAOImpl implements EmployeeDAO{
     private SessionFactory sessionFactory;
 
     @Override
+    @Transactional
     public List<Employee> getAllEmployees() {
         Session session = sessionFactory.getCurrentSession();
         List<Employee> allEmployees =  session.createQuery("from Employee order by id", Employee.class).getResultList();
@@ -27,12 +27,14 @@ public class EmployeeDAOImpl implements EmployeeDAO{
     }
 
     @Override
+    @Transactional
     public void saveEmployee(Employee employee) {
         Session session = sessionFactory.getCurrentSession();
         session.merge(employee);
     }
 
     @Override
+    @Transactional
     public Employee getEmployee(int id) {
         Session session = sessionFactory.getCurrentSession();
 
@@ -40,6 +42,7 @@ public class EmployeeDAOImpl implements EmployeeDAO{
     }
 
     @Override
+    @Transactional
     public void deleteEmployee(int id) {
         Session session = sessionFactory.getCurrentSession();
         Query<Employee> query = session.createQuery("delete from Employee where id =:employeeId");
